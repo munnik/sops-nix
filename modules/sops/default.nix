@@ -79,12 +79,26 @@ let
           User of the file.
         '';
       };
+      uid = lib.mkOption {
+        type = with lib.types; nullOr int;
+        default = -1;
+        description = ''
+          UID of the file, only applied when owner is set to "". The UID will be applied even if the corresponding user doesn't exist.
+        '';
+      };
       group = lib.mkOption {
         type = lib.types.str;
         default = users.${config.owner}.group;
         defaultText = lib.literalMD "{option}`config.users.users.\${owner}.group`";
         description = ''
           Group of the file.
+        '';
+      };
+      gid = lib.mkOption {
+        type = with lib.types; nullOr int;
+        default = -1;
+        description = ''
+          GID of the file, only applied when group is set to "". The UID will be applied even if the corresponding group doesn't exist.
         '';
       };
       sopsFile = lib.mkOption {
